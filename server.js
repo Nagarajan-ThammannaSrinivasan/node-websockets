@@ -17,8 +17,23 @@ wss.on('connection', (ws) => {
   ws.on('close', () => console.log('Client disconnected'));
 });
 
-setInterval(() => {
-  wss.clients.forEach((client) => {
-    client.send(new Date().toTimeString());
-  });
-}, 1000);
+// setInterval(() => {
+//   wss.clients.forEach((client) => {
+//     client.send(new Date().toTimeString());
+//   });
+// }, 1000);
+
+ server.use(express.urlencoded({
+    extended: true
+  }));
+
+server.use(express.json())
+
+ server.post('/postLocation',  (req, res) =>{
+    console.log(req.body)
+    res.end(JSON.stringify(req.body))
+    
+    wss.clients.forEach(client =>{        
+        client.send(JSON.stringify(req.body))
+    })
+})
