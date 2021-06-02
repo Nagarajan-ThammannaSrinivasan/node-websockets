@@ -41,7 +41,7 @@
     // var el;
 
     var sock = new WebSocket('wss://samplewebsocket.herokuapp.com');
-    var sock = new WebSocket(HOST);
+//     var sock = new WebSocket(HOST);
     sock.onopen = function(event){
         console.log("connection opened");
         sock.send('helllo')
